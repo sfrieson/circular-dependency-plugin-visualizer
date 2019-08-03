@@ -25,8 +25,14 @@ module.exports = {
       exclude: /node_modules/,
       cwd: process.cwd()
     }, {
-
+      filepath: path.join(__dirname, 'circular-dependency-visualization.html')
     }))
   ]
 }
 ```
+
+### Options
+
+| property | type | default |
+| --- | --- | --- |
+| filepath | string | `path.join(process.cwd(), 'circular-dependency-visualization.html')` |
