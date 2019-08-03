@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Circ Dep Viz</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@5.9.7/dist/d3.min.js"></script>
+    <style>
+      line {
+        /* stroke-dasharray: 100; */
+        animation: dash 1s linear infinite;
+        stroke-dasharray: 18 2;
+      }
+
+      @keyframes dash {
+        to {
+          stroke-dashoffset: 20;
+        }
+      }
+      #root {
+        height: 100vh;
+        width: 100vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- script -->
+  </body>
+  </html>

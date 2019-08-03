@@ -1,0 +1,31 @@
+{
+  "name": "circular-dependency-plugin-visualizer",
+  "version": "0.1.0",
+  "description": "A tool to help you visualize and understand circular dependencies in your webpack build.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sfrieson/circular-dependency-plugin-visualizer.git"
+  },
+  "keywords": [
+    "circular",
+    "dependency",
+    "webpack",
+    "visualization"
+  ],
+  "author": "Steven Frieson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sfrieson/circular-dependency-plugin-visualizer/issues"
+  },
+  "homepage": "https://github.com/sfrieson/circular-dependency-plugin-visualizer#readme",
+  "peerDependencies": {
+    "circular-dependency-plugin": ">= 4.4.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
+}
