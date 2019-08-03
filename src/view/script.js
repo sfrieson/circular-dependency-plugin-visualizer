@@ -9,8 +9,6 @@ const scale = d3.scaleOrdinal(d3.schemeCategory10)
     const width = parseInt(rootStyles.width, 10);
     const { nodes, links } = data;
 
-    console.log(height, width, nodes, links)
-
     const simulation = d3.forceSimulation(nodes)
       .force("link", d3.forceLink(links).id(d => d.id))
       .force("charge", d3.forceManyBody())
