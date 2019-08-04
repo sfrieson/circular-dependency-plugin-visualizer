@@ -2,7 +2,7 @@ const path = require('path');
 
 const render = require('./view/render');
 const write = require('./write');
-const PLUGIN_ERROR = 'Circular dependency detected:\r\n';
+const pluginLogging = require('./plugin-logging');
 
 module.exports = function makeVisualizer (userPluginConfig, inputConfig) {
   const files = {};
@@ -38,14 +38,7 @@ module.exports = function makeVisualizer (userPluginConfig, inputConfig) {
       });
 
       // Recreate plugin functionality of logging only if no onDetected is supplied.
-      if (!userPluginConfig.onDetected) {
-        let error = new Error(PLUGIN_ERROR.concat(paths.join(' -> ')))
-        if (userPluginConfig.failOnError) {
-          compilation.errors.push(error)
-        } else {
-          compilation.warnings.push(error)
-        }
-      }
+      pluginLogging(userPluginConfig, paths, compilation);
     },
     onEnd ({ compilation }) {
       write(config.filepath, render({
