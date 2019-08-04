@@ -15,8 +15,8 @@ The visualizer takes [all the same options](https://github.com/aackerman/circula
 
 ```js
 // webpack.config.js
-const CircularDependencyPlugin = require('circular-dependency-plugin')
-const visualizer = require('circular-dependency-plugin-visualizer')
+const CircularDependencyPlugin = require('circular-dependency-plugin');
+const visualizer = require('circular-dependency-plugin-visualizer');
 
 module.exports = {
   entry: "./src/index",
@@ -28,7 +28,7 @@ module.exports = {
       filepath: path.join(__dirname, 'circular-dependency-visualization.html')
     }))
   ]
-}
+};
 ```
 
 ### Options
@@ -36,3 +36,31 @@ module.exports = {
 | property | type | default |
 | --- | --- | --- |
 | filepath | string | `path.join(process.cwd(), 'circular-dependency-visualization.html')` |
+
+## Visualzation Notes
+
+### Node names
+You can hover over a node to show the file path.
+
+### Node color
+The nodes show different colors for the directory that they're in (up to 10 directories). If because of your directory set up, they are all in the same root directory, like `src`, try setting the `cwd` property in the circular-dependency-plugin options to the common root.
+```js
+// webpack.config.js
+const path = require('path');
+
+module.exports = {
+  ...,
+  plugins: [
+    new CircularDependencyPlugin(visualizer({
+      ...
+      cwd: path.resolve(__dirname, 'src')
+    })
+  ]
+};
+```
+
+### Stroke animations
+The strokes between nodes are animating in the direction of the import, showing the direction of the dependency chain. If a.js imports b.js, you will see the animation go from the a.js node to the b.js node. This is also the same direction as the arrows from the circular-dependency-plugin.
+```
+a.js -> b.js
+```
