@@ -1,7 +1,7 @@
 module.exports = function makeModel () {
   const files = {};
   const imports = {};
-  return  {
+  return {
     addFile (name, data) {
       files[name] = data;
     },
@@ -16,7 +16,7 @@ module.exports = function makeModel () {
       return Object.values(files);
     },
     getImports () {
-      return Object.values(imports)
+      return Object.values(imports);
     }
   };
-}
+};

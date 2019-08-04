@@ -21,7 +21,7 @@ it('skips logging if onDetected is supplied', () => {
   expect(compilation.errors.push).not.toHaveBeenCalled();
 });
 it('shows warnings when onDetected is not supplied', () => {
-  pluginLoggin({}, paths, compilation)
+  pluginLoggin({}, paths, compilation);
   expect(compilation.warnings.push).toHaveBeenCalled();
 });
 it('shows errorss when onDetected is not supplied and failOnError is supplied', () => {

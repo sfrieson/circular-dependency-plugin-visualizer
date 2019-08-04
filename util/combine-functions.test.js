@@ -1,7 +1,7 @@
 const combineFns = require('./combine-functions');
 
 it('returns a new function', () => {
-  expect(typeof combineFns(() => null)).toBe('function')
+  expect(typeof combineFns(() => null)).toBe('function');
 });
 
 it('calls all combined functions', () => {

@@ -27,12 +27,12 @@ module.exports = function makeController (pluginConfig, config, model) {
       return {
         files: model.getFiles(),
         imports: model.getImports()
-      }
+      };
     },
     getConfig () {
       return {
         onStart () { },
-        onDetected ({ /* module: webpackModuleRecord, */ paths, compilation }) {
+        onDetected ({ paths, compilation }) {
           controller.recordPaths(paths);
 
           // Recreate plugin functionality of logging only if no onDetected is supplied.
@@ -42,7 +42,7 @@ module.exports = function makeController (pluginConfig, config, model) {
           const filepath = controller.generateVisualization();
           compilation.warnings.push('Circular dependency visulization output to:\r\n' + filepath);
         }
-      }
+      };
     },
     recordPaths (paths) {
       paths.forEach(function (path, i) {
@@ -50,7 +50,7 @@ module.exports = function makeController (pluginConfig, config, model) {
         controller.addDependency(path, paths[i + 1]);
       });
     }
-  }
+  };
 
   return controller;
 };

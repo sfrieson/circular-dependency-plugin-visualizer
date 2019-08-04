@@ -10,7 +10,7 @@ beforeEach(() => {
     addFile: jest.fn(),
     addImport: jest.fn(),
     getFiles: jest.fn(),
-    getImports: jest.fn(),
+    getImports: jest.fn()
   };
 });
 
@@ -27,7 +27,7 @@ it('calls `recordPaths` when cyclical dependency is detected', () => {
   controller.recordPaths = jest.fn();
   const paths = ['a.js', 'b.js', 'c.js', 'a.js'];
   const compilation = { warnings: [] };
-  controller.getConfig().onDetected({ paths, compilation })
+  controller.getConfig().onDetected({ paths, compilation });
   expect(controller.recordPaths).toHaveBeenCalled();
   expect(controller.recordPaths.mock.calls[0][0]).toBe(paths);
 });
@@ -46,7 +46,7 @@ it('adds a file to the model', () => {
   expect(model.addFile.mock.calls[0][1]).toHaveProperty('id', filename);
 });
 it('adds a file and dependency for each path it records', () => {
-  const paths = ['a.js', 'b.js', 'c.js', 'a.js']
+  const paths = ['a.js', 'b.js', 'c.js', 'a.js'];
   const controller = makeController(pluginConfig, config, model);
   controller.addFile = jest.fn();
   controller.addDependency = jest.fn();

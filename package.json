@@ -4,6 +4,7 @@
   "description": "A tool to help you visualize and understand circular dependencies in your webpack build.",
   "main": "src/index.js",
   "scripts": {
+    "lint": "semistandard",
     "test": "jest --coverage"
   },
   "repository": {
@@ -26,6 +27,17 @@
     "circular-dependency-plugin": ">= 4.4.0"
   },
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "semistandard": "^13.0.1"
+  },
+  "semistandard": {
+    "globals": [
+      "jest",
+      "expect",
+      "it",
+      "describe",
+      "beforeEach",
+      "test"
+    ]
   }
 }

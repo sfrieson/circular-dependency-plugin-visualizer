@@ -1,3 +1,4 @@
+/* globals d3 */
 const colorNode = ((scale, d) => scale(d.group))
   .bind(null, d3.scaleOrdinal(d3.schemeCategory10));
 
@@ -14,28 +15,28 @@ function plot (width, height, data) {
     .force('y', d3.forceY());
 
   const svg = d3.create('svg')
-    .attr('viewBox', [-width / 2, -height / 2, width, height])
+    .attr('viewBox', [-width / 2, -height / 2, width, height]);
 
   const link = svg.append('g')
-      .attr('stroke', '#999')
-      .attr('stroke-opacity', 0.6)
+    .attr('stroke', '#999')
+    .attr('stroke-opacity', 0.6)
     .selectAll('line')
     .data(links)
     .join('line')
-      .attr('stroke-width', 2)
+    .attr('stroke-width', 2);
 
   const node = svg.append('g')
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 1.5)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1.5)
     .selectAll('circle')
     .data(nodes)
     .join('circle')
-      .attr('r', 5)
-      .attr('fill', colorNode)
-      .call(drag(simulation));
+    .attr('r', 5)
+    .attr('fill', colorNode)
+    .call(drag(simulation));
 
   node.append('title')
-      .text(d => d.id);
+    .text(d => d.id);
 
   simulation.on('tick', () => {
     link
@@ -55,8 +56,8 @@ function plot (width, height, data) {
 function zoom (node, link) {
   return d3.zoom()
     .on('zoom', function () {
-      node.attr('transform', d3.event.transform)
-      link.attr('transform', d3.event.transform)
+      node.attr('transform', d3.event.transform);
+      link.attr('transform', d3.event.transform);
     });
 }
 
@@ -82,4 +83,4 @@ const root = document.getElementById('root');
 const rootStyles = window.getComputedStyle(root);
 const height = parseInt(rootStyles.height, 10);
 const width = parseInt(rootStyles.width, 10);
-root.appendChild(plot(width, height, /* data */));
+root.appendChild(plot(width, height /* data */));

@@ -6,7 +6,6 @@ it('returns a config object', () => {
 });
 
 it('warns the output filename at the end', () => {
-  const paths = ['a.js', 'b.js', 'c.js', 'a.js'];;
   const compilation = {
     warnings: {
       push: jest.fn()

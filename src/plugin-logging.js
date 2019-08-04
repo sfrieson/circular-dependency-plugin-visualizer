@@ -6,11 +6,11 @@ const BASE_ERROR = 'Circular dependency detected:\r\n';
 module.exports = function (options, pathList, compilation) {
   if (!options.onDetected) {
     // mark warnings or errors on webpack compilation
-    let error = new Error(BASE_ERROR.concat(pathList.join(' -> ')))
+    let error = new Error(BASE_ERROR.concat(pathList.join(' -> ')));
     if (options.failOnError) {
-      compilation.errors.push(error)
+      compilation.errors.push(error);
     } else {
-      compilation.warnings.push(error)
+      compilation.warnings.push(error);
     }
   }
-}
+};
