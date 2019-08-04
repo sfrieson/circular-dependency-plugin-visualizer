@@ -1,11 +1,8 @@
 jest.mock('fs');
-const makeVisualizer = require('./visualizer');
+const makeVisualizer = require('.');
 
-it('returns an object with plugin methods', () => {
-  const visualizer = makeVisualizer();
-  expect(visualizer).toHaveProperty('onStart');
-  expect(visualizer).toHaveProperty('onDetected');
-  expect(visualizer).toHaveProperty('onEnd');
+it('returns a config object', () => {
+  expect(typeof makeVisualizer()).toBe('object');
 });
 
 it('warns the output filename at the end', () => {
