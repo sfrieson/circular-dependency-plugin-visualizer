@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "semistandard",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "prepublish": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
