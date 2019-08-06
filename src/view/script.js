@@ -83,4 +83,5 @@ const root = document.getElementById('root');
 const rootStyles = window.getComputedStyle(root);
 const height = parseInt(rootStyles.height, 10);
 const width = parseInt(rootStyles.width, 10);
-root.appendChild(plot(width, height /* data */));
+// eslint-disable-next-line comma-dangle
+root.appendChild(plot(width, height, /* data */));
