@@ -1,4 +1,6 @@
 /* globals d3 */
+/* Fork of Force-Directed Graph by Mike Bostock */
+/* https://observablehq.com/@d3/force-directed-graph */
 const colorNode = ((scale, d) => scale(d.group))
   .bind(null, d3.scaleOrdinal(d3.schemeCategory10));
 
@@ -11,8 +13,7 @@ function plot (width, height, data) {
   const simulation = d3.forceSimulation(nodes)
     .force('charge', charge)
     .force('link', d3.forceLink(links).id(d => d.id))
-    .force('x', d3.forceX())
-    .force('y', d3.forceY());
+    .force('center', d3.forceCenter(0, 0));
 
   const svg = d3.create('svg')
     .attr('viewBox', [-width / 2, -height / 2, width, height]);
