@@ -19,11 +19,25 @@ function join (a, ...others) {
   );
 }
 
-function simpleCircle (size, filename) {
+function rotate (deg, circle) {
+  // Removes the connection to the beginning, a duplicate
+  circle.pop();
+  const percent = deg / 360;
+  const nodeCount = Math.floor(circle.length * percent);
+  const rotated = circle.slice(nodeCount + 1).concat(circle.slice(0, nodeCount));
+  // Reconnect on the first node.
+  rotated.push(rotated[0]);
+  return rotated;
+}
+
+function simpleCircle (size, filename, seed = []) {
   minCircles++
   const path = [];
   for (var i = 0; i < size; i++) {
-    path.push(filename(i));
+    let node = null;
+    if (i < seed.length) node = seed[i];
+    else node = filename(i);
+    path.push(node);
   }
   path.push(path[0]);
   return path;
@@ -93,6 +107,12 @@ detected.push(join(
   simpleCircle(4, makeFilename(randomLetter10, uniqueLetter)),
   simpleCircle(5, makeFilename(getSameLetter(), uniqueLetter)),
 ));
+
+(() => {
+  const c10 = simpleCircle(10, makeFilename(getSameLetter(), uniqueLetter));
+  detected.push(simpleCircle(5, makeFilename(getSameLetter(), uniqueLetter), [c10[5], c10[3]]));
+  detected.push(c10);
+})()
 
 console.log({files, minCircles});
 module.exports = { detected };

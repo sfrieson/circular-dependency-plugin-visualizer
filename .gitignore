@@ -1,3 +1,6 @@
 node_modules
 coverage
 logs
+
+# Generated files
+test/output/out-*

@@ -6,9 +6,18 @@ const s40 = require('./data/size-40');
 
 const compilation = { warnings: [], errors: [] };
 
-const config = visualizer({}, {
-  filepath: path.join(__dirname, 'output.html')
-});
+const sets = [
+  ['empty', empty],
+  ['small', small],
+  ['40-nodes', s40]
+];
 
-s40.detected.forEach(paths => config.onDetected({ paths, compilation }));
-config.onEnd({ compilation });
+sets.forEach(([filename, data]) => {
+  const config = visualizer({}, {
+    filepath: path.join(__dirname, 'output', `out-${filename}.html`)
+  });
+
+  data.detected.forEach(paths => config.onDetected({ paths, compilation }));
+  config.onEnd({ compilation });
+
+});
