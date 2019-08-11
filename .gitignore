@@ -4,3 +4,4 @@ logs
 
 # Generated files
 test/output/out-*
+cypress/videos

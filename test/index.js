@@ -19,5 +19,4 @@ sets.forEach(([filename, data]) => {
 
   data.detected.forEach(paths => config.onDetected({ paths, compilation }));
   config.onEnd({ compilation });
-
 });

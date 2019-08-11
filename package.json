@@ -4,9 +4,13 @@
   "description": "A tool to help you visualize and understand circular dependencies in your webpack build.",
   "main": "src/index.js",
   "scripts": {
+    "cypress": "cypress open",
+    "pree2e": "node test/server &",
+    "e2e": "wait-on http://localhost:3000 && cypress run",
+    "poste2e": "./test/kill-server.sh",
     "lint": "semistandard",
     "test": "jest --coverage",
-    "prepublish": "npm run lint && npm run test"
+    "prepublish": "npm run lint && npm run test && npm run e2e"
   },
   "repository": {
     "type": "git",
@@ -30,12 +34,16 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
     "cypress": "^3.4.1",
+    "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^24.8.0",
-    "semistandard": "^13.0.1"
+    "semistandard": "^13.0.1",
+    "wait-on": "^3.3.0"
   },
   "semistandard": {
     "globals": [
+      "context",
+      "cy",
       "jest",
       "expect",
       "it",
