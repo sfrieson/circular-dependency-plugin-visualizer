@@ -6,7 +6,7 @@
   "scripts": {
     "cypress": "cypress open",
     "pree2e": "node test/server &",
-    "e2e": "wait-on http://localhost:3000 && cypress run",
+    "e2e": "node ./test/generate-output && wait-on http://localhost:3000 && cypress run",
     "poste2e": "./test/kill-server.sh",
     "lint": "semistandard",
     "test": "jest --coverage",
