@@ -13,10 +13,10 @@ module.exports = function makeModel () {
       };
     },
     getFiles () {
-      return Object.values(files);
+      return files;
     },
     getImports () {
-      return Object.values(imports);
+      return imports;
     }
   };
 };

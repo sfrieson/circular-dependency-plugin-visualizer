@@ -9,7 +9,8 @@ const charge = d3.forceManyBody()
   .distanceMax(200);
 
 function plot (width, height, data) {
-  const { nodes, links } = data;
+  const nodes = Object.keys(data.nodes).map(key => data.nodes[key]);
+  const links = Object.keys(data.links).map(key => data.links[key]);
   const simulation = d3.forceSimulation(nodes)
     .force('charge', charge)
     .force('link', d3.forceLink(links).id(d => d.id))
