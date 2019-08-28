@@ -4,7 +4,7 @@ function makeFilename (getFolder, getFile) {
   return (...args) => {
     files++;
     return `${getFolder(...args)}/${getFile(...args)}.js`;
-  }
+  };
 }
 
 function join (a, ...others) {
@@ -19,19 +19,19 @@ function join (a, ...others) {
   );
 }
 
-function rotate (deg, circle) {
-  // Removes the connection to the beginning, a duplicate
-  circle.pop();
-  const percent = deg / 360;
-  const nodeCount = Math.floor(circle.length * percent);
-  const rotated = circle.slice(nodeCount + 1).concat(circle.slice(0, nodeCount));
-  // Reconnect on the first node.
-  rotated.push(rotated[0]);
-  return rotated;
-}
+// function rotate (deg, circle) {
+//   // Removes the connection to the beginning, a duplicate
+//   circle.pop();
+//   const percent = deg / 360;
+//   const nodeCount = Math.floor(circle.length * percent);
+//   const rotated = circle.slice(nodeCount + 1).concat(circle.slice(0, nodeCount));
+//   // Reconnect on the first node.
+//   rotated.push(rotated[0]);
+//   return rotated;
+// }
 
 function simpleCircle (size, filename, seed = []) {
-  minCircles++
+  minCircles++;
   const path = [];
   for (var i = 0; i < size; i++) {
     let node = null;
@@ -50,38 +50,38 @@ function figure8 (size, filename) {
   );
 }
 
-const getLetter = (function* letterGenerator () {
+const getLetter = (function * letterGenerator () {
   let num = 1;
   while (num > 0) {
     yield (num++).toString(36);
   }
-})()
+})();
 
 const uniqueLetter = () => getLetter.next().value;
 const getSameLetter = () => {
   const letter = getLetter.next().value;
   return () => letter;
-}
+};
 const randomLetter10 = () => 'abcdefghij'.split('')[Math.floor(Math.random() * 10)];
 const detected = [];
 
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
   detected.push(
     simpleCircle(3, makeFilename(randomLetter10, uniqueLetter))
   );
 }
-for (var i = 0; i < 7; i++) {
+for (let i = 0; i < 7; i++) {
   detected.push(
     simpleCircle(2, makeFilename(randomLetter10, uniqueLetter))
   );
 }
-for (var i = 0; i < 3; i++) {
+for (let i = 0; i < 3; i++) {
   detected.push(
     figure8(2, makeFilename(randomLetter10, uniqueLetter))
   );
 }
 
-for (var i = 0; i < 2; i++) {
+for (let i = 0; i < 2; i++) {
   detected.push(
     figure8(3, makeFilename(randomLetter10, uniqueLetter))
   );
@@ -105,14 +105,14 @@ detected.push(join(
   simpleCircle(10, makeFilename(randomLetter10, uniqueLetter)),
   simpleCircle(7, makeFilename(randomLetter10, uniqueLetter)),
   simpleCircle(4, makeFilename(randomLetter10, uniqueLetter)),
-  simpleCircle(5, makeFilename(getSameLetter(), uniqueLetter)),
+  simpleCircle(5, makeFilename(getSameLetter(), uniqueLetter))
 ));
 
 (() => {
   const c10 = simpleCircle(10, makeFilename(getSameLetter(), uniqueLetter));
   detected.push(simpleCircle(5, makeFilename(getSameLetter(), uniqueLetter), [c10[5], c10[3]]));
   detected.push(c10);
-})()
+})();
 
-console.log({files, minCircles});
+console.log({ files, minCircles });
 module.exports = { detected };
