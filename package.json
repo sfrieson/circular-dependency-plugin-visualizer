@@ -1,6 +1,6 @@
 {
   "name": "circular-dependency-plugin-visualizer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A tool to help you visualize and understand circular dependencies in your webpack build.",
   "main": "src/index.js",
   "scripts": {
