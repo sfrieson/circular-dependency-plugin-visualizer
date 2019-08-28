@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "cypress": "cypress open",
-    "pree2e": "node run test-server &",
+    "pree2e": "npm run test-server &",
     "e2e": "node ./test/generate-output && wait-on http://localhost:3000 && cypress run",
     "poste2e": "./test/kill-server.sh",
     "lint": "semistandard",
