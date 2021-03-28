@@ -1,55 +1,54 @@
-const pluginLogging = require('../plugin-logging');
-const render = require('../view/render');
-const write = require('../write');
+const pluginLogging = require("../plugin-logging");
+const render = require("../view/render");
+const write = require("../write");
 
-module.exports = function makeController (pluginConfig, config, model) {
+module.exports = function makeController(pluginConfig, config, model) {
   const controller = {
-    addDependency (source, target) {
+    addDependency(source, target) {
       if (target) model.addImport(`${source}->${target}`, source, target);
     },
-    addFile (path) {
+    addFile(path) {
       model.addFile(path, {
         id: path,
         value: 20,
-        group: path.split('/')[0],
-        radius: 5
+        group: path.split("/")[0],
+        radius: 5,
       });
     },
     config,
-    generateVisualization () {
-      write(
-        this.config.filepath,
-        render(this.getData())
-      );
+    generateVisualization() {
+      write(this.config.filepath, render(this.getData()));
       return this.config.filepath;
     },
-    getData () {
+    getData() {
       return {
         files: model.getFiles(),
-        imports: model.getImports()
+        imports: model.getImports(),
       };
     },
-    getConfig () {
+    getConfig() {
       return {
-        onStart () { },
-        onDetected ({ paths, compilation }) {
+        onStart() {},
+        onDetected({ paths, compilation }) {
           controller.recordPaths(paths);
 
           // Recreate plugin functionality of logging only if no onDetected is supplied.
           pluginLogging(pluginConfig, paths, compilation);
         },
-        onEnd ({ compilation }) {
+        onEnd({ compilation }) {
           const filepath = controller.generateVisualization();
-          compilation.warnings.push('Circular dependency visulization output to:\r\n' + filepath);
-        }
+          compilation.warnings.push(
+            "Circular dependency visulization output to:\r\n" + filepath
+          );
+        },
       };
     },
-    recordPaths (paths) {
+    recordPaths(paths) {
       paths.forEach(function (path, i) {
         controller.addFile(path);
         controller.addDependency(path, paths[i + 1]);
       });
-    }
+    },
   };
 
   return controller;

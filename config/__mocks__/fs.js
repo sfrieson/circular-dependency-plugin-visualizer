@@ -1,5 +1,5 @@
 const noop = () => null;
 module.exports = {
   writeFileSync: noop,
-  readFileSync: (filename) => 'File: ' + filename
+  readFileSync: (filename) => "File: " + filename,
 };

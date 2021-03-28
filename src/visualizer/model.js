@@ -1,22 +1,22 @@
-module.exports = function makeModel () {
+module.exports = function makeModel() {
   const files = {};
   const imports = {};
   return {
-    addFile (name, data) {
+    addFile(name, data) {
       files[name] = data;
     },
-    addImport (id, source, target) {
+    addImport(id, source, target) {
       imports[id] = {
         id,
         source,
-        target
+        target,
       };
     },
-    getFiles () {
+    getFiles() {
       return files;
     },
-    getImports () {
+    getImports() {
       return imports;
-    }
+    },
   };
 };

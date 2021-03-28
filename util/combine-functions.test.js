@@ -1,10 +1,10 @@
-const combineFns = require('./combine-functions');
+const combineFns = require("./combine-functions");
 
-it('returns a new function', () => {
-  expect(typeof combineFns(() => null)).toBe('function');
+it("returns a new function", () => {
+  expect(typeof combineFns(() => null)).toBe("function");
 });
 
-it('calls all combined functions', () => {
+it("calls all combined functions", () => {
   const a = jest.fn();
   const b = jest.fn();
   combineFns(a, b)();
@@ -12,7 +12,7 @@ it('calls all combined functions', () => {
   expect(b).toHaveBeenCalled();
 });
 
-it('calls combined functions with all arguments', () => {
+it("calls combined functions with all arguments", () => {
   const args = [1, 2, 3];
   const fn1 = function (a, b, c) {
     expect(a).toBe(args[0]);
@@ -27,6 +27,6 @@ it('calls combined functions with all arguments', () => {
   combineFns(fn1, fn2)(...args);
 });
 
-it('only calls functions', function () {
+it("only calls functions", function () {
   combineFns(() => null, false)();
 });

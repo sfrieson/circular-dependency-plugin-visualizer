@@ -1,21 +1,21 @@
-jest.mock('fs');
-const makeVisualizer = require('.');
+jest.mock("fs");
+const makeVisualizer = require(".");
 
-it('returns a config object', () => {
-  expect(typeof makeVisualizer()).toBe('object');
+it("returns a config object", () => {
+  expect(typeof makeVisualizer()).toBe("object");
 });
 
-it('warns the output filename at the end', () => {
+it("warns the output filename at the end", () => {
   const compilation = {
     warnings: {
-      push: jest.fn()
+      push: jest.fn(),
     },
     errors: {
-      push: jest.fn()
-    }
+      push: jest.fn(),
+    },
   };
 
-  const config = { filepath: 'abc.html' };
+  const config = { filepath: "abc.html" };
   const visualizer = makeVisualizer({}, config);
   visualizer.onEnd({ compilation });
   expect(compilation.warnings.push).toHaveBeenCalled();
