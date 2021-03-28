@@ -9,7 +9,7 @@ beforeEach(() => {
   model = {
     addFile: jest.fn(),
     addImport: jest.fn(),
-    getFiles: jest.fn(),
+    getFiles: jest.fn(() => ({})),
     getImports: jest.fn(),
   };
 });
@@ -72,4 +72,22 @@ it("returns the filepath from the visualization generation", () => {
   config.filepath = "./src/file.js";
   const controller = makeController(pluginConfig, config, model);
   expect(controller.generateVisualization()).toBe(config.filepath);
+});
+
+it("does not warn about the outfile if there are no cycles", () => {
+  const controller = makeController(pluginConfig, config, model);
+  const compilation = { warnings: [] };
+  controller.getConfig().onEnd({ compilation });
+  expect(compilation.warnings).toHaveLength(0);
+});
+
+it("warns about the outfile", () => {
+  model.getFiles = () => ({ "a.js": {}, "b.js": {} });
+  config.filepath = "foo.html";
+  const controller = makeController(pluginConfig, config, model);
+
+  const compilation = { warnings: [] };
+  controller.getConfig().onEnd({ compilation });
+  expect(compilation.warnings).toHaveLength(1);
+  expect(compilation.warnings[0]).toMatch(config.filepath);
 });

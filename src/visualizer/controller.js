@@ -35,8 +35,14 @@ module.exports = function makeController(pluginConfig, config, model) {
           // Recreate plugin functionality of logging only if no onDetected is supplied.
           pluginLogging(pluginConfig, paths, compilation);
         },
+        /** Creates the visualization with the current runs data, warning about it only if there are cycles. */
         onEnd({ compilation }) {
           const filepath = controller.generateVisualization();
+
+          const dependencyFileCount = Object.keys(model.getFiles()).length;
+          if (dependencyFileCount == 0) {
+            return;
+          }
           compilation.warnings.push(
             "Circular dependency visulization output to:\r\n" + filepath
           );
