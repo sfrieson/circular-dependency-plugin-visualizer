@@ -11,7 +11,7 @@ module.exports = function (data) {
       "<!-- script -->",
       `<script>${script.replace(
         "/* data */",
-        ", " + JSON.stringify({ nodes: data.files, links: data.imports })
+        JSON.stringify({ nodes: data.files, links: data.imports })
       )}</script>`
     );
 };
