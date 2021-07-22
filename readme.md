@@ -33,6 +33,7 @@ module.exports = {
             __dirname,
             "circular-dependency-visualization.html"
           ),
+          // labels: true
         }
       )
     ),
@@ -45,6 +46,7 @@ module.exports = {
 | property | type   | default                                                              |
 | -------- | ------ | -------------------------------------------------------------------- |
 | filepath | string | `path.join(process.cwd(), 'circular-dependency-visualization.html')` |
+| labels   | string | `false`                                                              |
 
 ## Visualzation Notes
 

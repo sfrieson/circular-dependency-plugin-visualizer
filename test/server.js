@@ -13,4 +13,9 @@ app.use(function (req, res) {
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
+  console.log(`Visit:
+  - http://localhost:${PORT}/out-40-nodes.html
+  - http://localhost:${PORT}/out-empty.html
+  - http://localhost:${PORT}/out-small.html
+  `);
 });
