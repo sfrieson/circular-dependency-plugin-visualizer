@@ -7,8 +7,13 @@ const colorNode = ((scale, d) => scale(d.group)).bind(
 );
 
 const charge = d3.forceManyBody().distanceMin(30).distanceMax(200);
-
-function plot(width, height, data) {
+/**
+ * @param {*} data
+ * @param {{
+ *     labels?: boolean // default false
+ * }} config
+ */
+function plot(width, height, data, config) {
   const nodes = Object.keys(data.nodes).map((key) => data.nodes[key]);
   const links = Object.keys(data.links).map((key) => data.links[key]);
   const simulation = d3
@@ -44,6 +49,18 @@ function plot(width, height, data) {
     .attr("fill", colorNode)
     .call(drag(simulation));
 
+    let labels
+    if (config?.labels) {
+      labels = svg
+        .append("g")
+        .attr("color", "#333")
+        .selectAll("text")
+        .data(nodes)
+        .join("text")
+        .attr("style", "font-family: Arial; font-size: 12px;")
+        .call(drag(simulation));
+    }
+
   node.append("title").text((d) => d.id);
 
   simulation.on("tick", () => {
@@ -54,15 +71,24 @@ function plot(width, height, data) {
       .attr("y2", (d) => d.target.y);
 
     node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+    if (labels) {
+        labels
+            .attr("x", (d) => d.x)
+            .attr("y", (d) => d.y)
+            .text(d => d.id)
+    }
   });
-  svg.call(zoom(node, link));
+  svg.call(zoom(node, link, labels));
   return svg.node();
 }
 
-function zoom(node, link) {
+function zoom(node, link, labels) {
   return d3.zoom().on("zoom", function () {
     node.attr("transform", d3.event.transform);
     link.attr("transform", d3.event.transform);
+    if (labels) {
+        labels.attr("transform", d3.event.transform);
+    }
   });
 }
 
@@ -90,4 +116,4 @@ const rootStyles = window.getComputedStyle(root);
 const height = parseInt(rootStyles.height, 10);
 const width = parseInt(rootStyles.width, 10);
 // eslint-disable-next-line comma-dangle
-root.appendChild(plot(width, height, /* data */));
+root.appendChild(plot(width, height, /* data */, /* config */));
