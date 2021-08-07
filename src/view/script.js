@@ -26,17 +26,14 @@ function plot(width, height, data) {
 
   const link = svg
     .append("g")
-    .attr("stroke", "#999")
-    .attr("stroke-opacity", 0.6)
+    .attr("class", "line-group")
     .selectAll("line")
     .data(links)
-    .join("line")
-    .attr("stroke-width", 2);
+    .join("line");
 
   const node = svg
     .append("g")
-    .attr("stroke", "#fff")
-    .attr("stroke-width", 1.5)
+    .attr('class', 'node-group')
     .selectAll("circle")
     .data(nodes)
     .join("circle")
@@ -46,11 +43,10 @@ function plot(width, height, data) {
 
     let labels = svg
       .append("g")
-      .attr("color", "#333")
       .selectAll("text")
       .data(nodes)
       .join("text")
-      .attr("style", "font-family: Arial; font-size: 12px;")
+      .attr("class", "label")
       .call(drag(simulation));
 
   node.append("title").text((d) => d.id);
