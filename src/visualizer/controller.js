@@ -17,10 +17,7 @@ module.exports = function makeController(pluginConfig, config, model) {
     },
     config,
     generateVisualization() {
-      write(
-        this.config.filepath,
-        render(this.getData(), this.config)
-      );
+      write(this.config.filepath, render(this.getData()));
       return this.config.filepath;
     },
     getData() {
