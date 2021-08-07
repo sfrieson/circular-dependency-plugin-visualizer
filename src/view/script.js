@@ -33,7 +33,7 @@ function plot(width, height, data) {
 
   const node = svg
     .append("g")
-    .attr('class', 'node-group')
+    .attr("class", "node-group")
     .selectAll("circle")
     .data(nodes)
     .join("circle")
@@ -41,13 +41,13 @@ function plot(width, height, data) {
     .attr("fill", colorNode)
     .call(drag(simulation));
 
-    let labels = svg
-      .append("g")
-      .selectAll("text")
-      .data(nodes)
-      .join("text")
-      .attr("class", "label")
-      .call(drag(simulation));
+  let labels = svg
+    .append("g")
+    .selectAll("text")
+    .data(nodes)
+    .join("text")
+    .attr("class", "label")
+    .call(drag(simulation));
 
   node.append("title").text((d) => d.id);
 
@@ -62,7 +62,7 @@ function plot(width, height, data) {
     labels
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y)
-      .text(d => d.id)
+      .text((d) => d.id);
   });
   svg.call(zoom(node, link, labels));
   return svg.node();
@@ -100,4 +100,4 @@ const rootStyles = window.getComputedStyle(root);
 const height = parseInt(rootStyles.height, 10);
 const width = parseInt(rootStyles.width, 10);
 // eslint-disable-next-line comma-dangle
-root.appendChild(plot(width, height, /* data */));
+root.appendChild(plot(width, height /* data */));

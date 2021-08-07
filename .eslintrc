@@ -1,0 +1,17 @@
+{
+  "extends": ["eslint:recommended"],
+  "plugins": ["jest", "cypress"],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "cypress/globals": true
+  },
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      { "ignoreRestSiblings": true, "argsIgnorePattern": "^_" }
+    ]
+  }
+}
