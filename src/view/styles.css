@@ -10,20 +10,26 @@ body {
   stroke-opacity: 0.6;
 }
 line {
-  animation: dash 1s linear infinite;
+  /* animation: dash 1s linear infinite; */
   stroke-dasharray: 18 2;
   stroke-width: 2;
 }
 
-.node-group {
+.node {
   stroke: #fff;
   stroke-width: 1.5;
+}
+
+.node:hover + .label {
+  display: block;
 }
 
 .label {
   color: #333;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.75em;
+  display: none;
+  transform: translate(1em, 1em);
 }
 
 @keyframes dash {

@@ -31,25 +31,43 @@ function plot(width, height, data) {
     .data(links)
     .join("line");
 
-  const node = svg
-    .append("g")
-    .attr("class", "node-group")
-    .selectAll("circle")
+  // const node = svg
+  //   .append("g")
+  //   .attr("class", "node-group")
+  //   .selectAll("circle")
+  //   .data(nodes)
+  //   .join("circle")
+  //   .attr("r", 5)
+  //   .attr("fill", colorNode)
+  //   .call(drag(simulation));
+
+  // let labels = svg
+  //   .append("g")
+  //   .selectAll("text")
+  //   .data(nodes)
+  //   .join("text")
+  //   .attr("class", "label")
+  //   .call(drag(simulation));
+
+  var gnodes = svg
+    .selectAll("g.gnode")
     .data(nodes)
-    .join("circle")
+    .enter()
+    .append("g")
+    .classed("gnode", true);
+
+  var node = gnodes
+    .append("circle")
+    .attr("class", "node")
     .attr("r", 5)
-    .attr("fill", colorNode)
+    .style("fill", colorNode)
     .call(drag(simulation));
 
-  let labels = svg
-    .append("g")
-    .selectAll("text")
-    .data(nodes)
-    .join("text")
+  // Append the labels to each group
+  var labels = gnodes
+    .append("text")
     .attr("class", "label")
-    .call(drag(simulation));
-
-  node.append("title").text((d) => d.id);
+    .text((d) => d.id);
 
   simulation.on("tick", () => {
     link
@@ -64,7 +82,7 @@ function plot(width, height, data) {
       .attr("y", (d) => d.y)
       .text((d) => d.id);
   });
-  svg.call(zoom(node, link, labels));
+  svg.call(zoom(gnodes, link, labels));
   return svg.node();
 }
 
